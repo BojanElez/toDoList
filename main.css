@@ -1,0 +1,98 @@
+:root {
+  --mainWhite: #ecdfdf;
+  --mainGreen: #80cfa9;
+  --mainBlack: #333333;
+  --mainRed: #d62828;
+  --mainBlue: #11b5e4;
+}
+body {
+  background: var(--mainWhite);
+  color: #333333;
+}
+.btn-green {
+  border-color: var(--mainGreen);
+  background: transparent;
+  color: var(--mainGreen);
+}
+.btn-green:hover {
+  background: var(--mainGreen);
+  color: var(--mainBlack);
+}
+.form-control {
+  border-color: var(--mainGreen) !important;
+}
+
+.feedback {
+  display: none;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+}
+.item-icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.complete-item {
+  color: var(--mainGreen);
+}
+.complete-item:hover {
+  color: var(--mainGreen);
+}
+.edit-item {
+  color: var(--mainBlue);
+}
+.edit-item:hover {
+  color: var(--mainBlue);
+}
+.delete-item {
+  color: var(--mainRed);
+}
+.delete-item:hover {
+  color: var(--mainRed);
+}
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+.visibility {
+  opacity: 0.5;
+}
+.showItem {
+  display: block;
+}
+.icon {
+  max-width: 50px;
+}
+.item-text {
+  min-width: 80%;
+  display: inline-block;
+  position: relative;
+}
+.item-name {
+  min-width: 300px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: left;
+}
+h5.item-name {
+  opacity: 1;
+  font-size: 16px;
+  font-family: inherit;
+}
+.item-text input {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 16px;
+  font-family: inherit;
+  text-align: left;
+}
+.edit-mode input {
+  opacity: 1;
+}
+.edit-mode h5.item-name {
+  opacity: 0;
+}

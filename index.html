@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="main.css" />
+  <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet" />
+  <link rel="stylesheet" href="all.css" />
+  <title>Grocery Item</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style></style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col mx-auto col-md-8 mt-3 text-center">
+        <div class="alert text-capitalize feedback">write value for item</div>
+        <form id="itemForm" class="my-3">
+          <h3 class="text-capitalize mb-4">to do list</h3>
+          <div class="input-group">
+            <input type="text" class="form-control text-capitalize" id="itemInput" placeholder="name..." />
+            <div class="input-group-append">
+              <button class="btn btn-green text-capitalize" id="add" type="submit">
+                add item
+              </button>
+            </div>
+          </div>
+        </form>
+        <small class="error"></small>
+        <div class="item-container">
+          <div class="item-list my-5"></div>
+          <button type="button" class="btn btn-green my-3 text-capitalize" id="clear-list">
+            clear items
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+  <script>
+    (function () {
+      const addItem = document.getElementById("itemForm");
+      const removeItems = document.getElementById("clear-list");
+      const itemList = document.querySelector(".item-list");
+      const small = document.querySelector(".error");
+      let itemInput = document.getElementById("itemInput");
+
+      addItem.addEventListener(
+        "submit",
+        function (e) {
+          e.preventDefault();
+          if (itemInput.value !== "") {
+            localStorage.setItem("input", itemInput);
+            itemList.innerHTML +=
+              "<div class='item my-3'><div class='item-text'><h5 class='item-name text-capitalize'>" +
+              itemInput.value +
+              "</h5><input type='text' id='input'></div><div class='icon' id='trash'><i class='fas fa-trash'></i></div></div>";
+            store();
+            itemInput.value = "";
+            small.innerHTML = "";
+          } else {
+            small.innerHTML = "Field cannot be empty";
+          }
+        },
+        false
+      );
+
+      itemList.addEventListener("click", removeItem);
+
+      function removeItem(e) {
+        const myEl = e.target.parentElement.parentElement;
+        if (myEl.getAttribute("id") === "trash") {
+          let removeItem = myEl.parentElement;
+          removeItem.remove();
+          localStorage.removeItem(removeItem);
+          store();
+        }
+      }
+
+
+      function store() {
+        window.localStorage.myitems = itemList.innerHTML;
+      }
+      getValues();
+      function getValues() {
+        var storedValues = window.localStorage.myitems;
+        itemList.innerHTML = storedValues;
+        if (storedValues === undefined) {
+          itemList.innerHTML = "";
+        }
+      }
+
+      removeItems.addEventListener("click", function () {
+        itemList.innerHTML = "";
+        localStorage.clear();
+      });
+    })();
+  </script>
+</body>
+
+</html>
